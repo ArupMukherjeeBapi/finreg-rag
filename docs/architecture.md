@@ -85,6 +85,10 @@ Retention: manifests and run reports are kept forever (audit trail, kilobytes).
 Chunk payloads keep the last N snapshots (`KEEP_LAST_N`, 0 means keep all), plus
 any snapshot pinned by a published eval result or demo.
 
+Until M3.6 the index is written to a single flat `data/processed/index.db`, which
+is overwritten on every build. Versioning lands once the snapshot also has to
+contain the vector collection, so it is built once rather than twice.
+
 ## Trust boundaries
 
 Document text is **untrusted input**. A PDF can contain "ignore previous
@@ -97,7 +101,12 @@ reference material, never as instructions, and every claim must carry a citation
 | Milestone | Delivers | Status |
 |---|---|---|
 | M0-M2 | Repo, provider-agnostic LLM call, ingestion with page metadata | done |
-| M3 | Hybrid retrieval and cited answers | next |
+| M3.1 | Keyword baseline retrieval (measuring stick, in memory) | done |
+| M3.2 | Chunks in SQLite, keyword search with FTS5 and BM25 ranking | done |
+| M3.3 | Embeddings stored in Qdrant | next |
+| M3.4 | Hybrid retrieval: keyword and vector scores combined | planned |
+| M3.5 | Cited answers, refusal when no source is relevant | planned |
+| M3.6 | Versioned snapshot for the whole index (SQLite file plus Qdrant collection) and `current.json` pointer, per ADR 0003 | planned |
 | M4 | Evaluation set, accuracy, cost and latency numbers | planned |
 | M5 | FastAPI endpoint, validation, timeouts, retries, logging, health endpoint and degraded-mode flag | planned |
 | M6 | CI with an accuracy gate, container build | planned |

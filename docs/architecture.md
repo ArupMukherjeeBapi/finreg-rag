@@ -52,7 +52,7 @@ service, without dragging the web layer and its configuration in with them.
 | `retrieval` | Question to best chunks (hybrid scoring) | Returns an empty result; never invents or substitutes chunks |
 | `generation` | Chunks plus question to cited answer | Provider down: retry, then fallback provider |
 | `llm` | One door to any LLM provider | Retries, timeouts, fallback live here |
-| `api` | HTTP: validation, errors, logging, idempotency | Returns typed errors, never a stack trace |
+| `api` | HTTP: validation, errors, logging, idempotency, health endpoint reporting index and vector store availability | Returns typed errors, never a stack trace; answers carry a flag when results came from keyword only (degraded) |
 | `core` | Shared types (Chunk, Answer) and error classes | - |
 
 ## Storage
@@ -99,7 +99,7 @@ reference material, never as instructions, and every claim must carry a citation
 | M0-M2 | Repo, provider-agnostic LLM call, ingestion with page metadata | done |
 | M3 | Hybrid retrieval and cited answers | next |
 | M4 | Evaluation set, accuracy, cost and latency numbers | planned |
-| M5 | FastAPI endpoint, validation, timeouts, retries, logging | planned |
+| M5 | FastAPI endpoint, validation, timeouts, retries, logging, health endpoint and degraded-mode flag | planned |
 | M6 | CI with an accuracy gate, container build | planned |
 | M7 | Multi-step retrieval agent (LangGraph): search, judge, search again | planned |
 | Deploy | Public demo, Qdrant Cloud free tier | after M7 |

@@ -92,6 +92,22 @@ instructions". Document content is passed to the model as clearly delimited
 reference material, never as instructions, and every claim must carry a citation.
 **planned**
 
+## Roadmap
+
+| Milestone | Delivers | Status |
+|---|---|---|
+| M0-M2 | Repo, provider-agnostic LLM call, ingestion with page metadata | done |
+| M3 | Hybrid retrieval and cited answers | next |
+| M4 | Evaluation set, accuracy, cost and latency numbers | planned |
+| M5 | FastAPI endpoint, validation, timeouts, retries, logging | planned |
+| M6 | CI with an accuracy gate, container build | planned |
+| M7 | Multi-step retrieval agent (LangGraph): search, judge, search again | planned |
+| Deploy | Public demo, Qdrant Cloud free tier | after M7 |
+
+The core pipeline is hand written so it can be debugged and measured line by
+line. LangGraph is used only in M7, where a loop with state and checkpoints
+is what the problem actually needs.
+
 ## Deliberately out of scope, and what would change that
 
 | Not built | Would build it when |
